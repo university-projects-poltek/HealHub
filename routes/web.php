@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/listbarang/{id}/{nama}/{jenis}', function($id, $nama, $jenis){
+//     return view ('list_barang', compact('id', 'nama', 'jenis'));
+
+// });
+
+// Route::get('/listobat/{id}/{nama}/{jenis}', [ListObatController::class, 'tampilkan']);
+
+Route::get('/listobat/{id}/{nama}/{jenis}' , 'ListObatController@tampilkan');
