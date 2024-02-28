@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,3 +26,6 @@ Route::get('/', function () {
 // Route::get('/listobat/{id}/{nama}/{jenis}', [ListObatController::class, 'tampilkan']);
 
 Route::get('/listobat/{id}/{nama}/{jenis}' , 'ListObatController@tampilkan');
+
+Route::get('/login', 'LoginController@index');
+Route::post('/login', 'LoginController@autentikasi');
