@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +25,7 @@ Route::get('/', function () {
 
 // Route::get('/listobat/{id}/{nama}/{jenis}', [ListObatController::class, 'tampilkan']);
 
-Route::get('/listobat/{id}/{nama}/{jenis}' , 'ListObatController@tampilkan');
+Route::get('/listobat/{id}/{nama}/{jenis}', 'ListObatController@tampilkan');
+
+
+Route::get('/register', 'RegisterController@pageRegister');
