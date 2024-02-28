@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
 
 
 /*
@@ -28,5 +27,5 @@ Route::get('/', function () {
 
 Route::get('/listobat/{id}/{nama}/{jenis}' , 'ListObatController@tampilkan');
 
-Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [LoginController::class, 'autentikasi']);
+Route::get('/login', 'LoginController@index');
+Route::post('/login', 'LoginController@autentikasi');
