@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ListBarangController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +34,8 @@ Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@autentikasi');
 
 Route::get('/register', 'RegisterController@pageRegister');
+
+
+Route::get('/listbarang', [ListBarangController::class, 'tampilkan'] );
+
+Route::get('/products', [ProductsController::class, 'show']);
