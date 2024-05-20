@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
       Schema::create('carts', function (Blueprint $table) {
-        $table->uuid('cart_id')->primary();
-        $table->foreignUuid('user_id')->references('user_id')->on('users');
+        $table->id();
+        $table->foreignId('user_id')->references('id')->on('users');
     });
     }
 
