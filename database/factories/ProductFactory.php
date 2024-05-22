@@ -18,7 +18,6 @@ class ProductFactory extends Factory
   {
     return [
       'name' => fake()->word(),
-      // 'category_id' => fake()->randomDigit(),
       'description' => fake()->sentence(),
       'price' => fake()->numberBetween(1000, 10000), // Harga antara 1000 dan 10000
       'quantity' => fake()->numberBetween(1, 100), // Jumlah antara 1 dan 100

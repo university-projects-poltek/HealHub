@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -10,6 +11,7 @@ class ProductsController extends Controller
     public function index(){
       return view('products', [
         "title" => "All Products",
+        "categories" => Category::all(),
         "products" => Product::all(),
       ]);
     }
@@ -28,18 +30,16 @@ class ProductsController extends Controller
       $validateData = $request->validate([
         'name' => 'required',
         'description' => 'required',
-        'price' => 'required',
-        'quantity' => 'required',
+        'price' => 'required|integer|min:1',
+        'quantity' => 'required|integer|min:1',
         'manufacturer' => 'required',
-        'category_id' => 'required',
+        'category_id' => 'required|exists:categories,id',
       ]);
-
-      // * TODO: create dynamic category INSERT
-      $validateData['category_id'] = 1;
 
       Product::create($validateData);
 
-      return redirect('/products');
+      return redirect('/products')->with('success', 'Product successfully created.');
+
     }
 
     public function update(Request $request, $id){
@@ -49,8 +49,8 @@ class ProductsController extends Controller
       $validatedData = $request->validate([
         'name' => 'required',
         'description' => 'required',
-        'price' => 'required|numeric',
-        'quantity' => 'required|integer',
+        'price' => 'required|integer|min:1',
+        'quantity' => 'required|integer|min:1',
         'manufacturer' => 'required',
         'category_id' => 'required|exists:categories,id',
       ]);
