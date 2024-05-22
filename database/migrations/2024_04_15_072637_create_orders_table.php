@@ -12,10 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->uuid('order_id')->primary();
-            // $table->foreignUuid('user_id')->references('user_id')->on('users');
-            // $table->foreignUuid('product_id')->references('product_id')->on('products');
-            $table->foreignUuid('user_id')->references('user_id')->on('users');
+            $table->id();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->date('order_date');
             $table->integer('total_amount');
             $table->timestamps();

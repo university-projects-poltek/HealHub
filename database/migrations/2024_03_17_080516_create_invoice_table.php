@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('invoice', function (Blueprint $table) {
-            $table->uuid('invoice_id')->primary();
-            $table->foreignUuid('product_id')->references('product_id')->on('products');
+            $table->id();
+            $table->foreignId('product_id')->references('id')->on('products');
             $table->date('date_invoice');
             $table->string('status');
             $table->timestamps();

@@ -38,4 +38,12 @@ Route::get('/register', 'RegisterController@pageRegister');
 
 Route::get('/listbarang', [ListBarangController::class, 'tampilkan'] );
 
-Route::get('/products', [ProductsController::class, 'show']);
+
+// CRUD Products
+Route::prefix('/products')->group(function(){
+  Route::get('/', [ProductsController::class, 'index']);
+  Route::get('/{id}', [ProductsController::class, 'show']);
+  Route::post('/', [ProductsController::class, 'store']);
+  Route::put('/{id}', [ProductsController::class, 'update']);
+  Route::delete('/{id}', [ProductsController::class, 'destroy']);
+});

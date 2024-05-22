@@ -17,12 +17,12 @@ class ProductFactory extends Factory
   public function definition(): array
   {
     return [
-      'name' => $this->faker->word,
-      'description' => $this->faker->sentence,
-      'price' => $this->faker->numberBetween(1000, 10000), // Harga antara 1000 dan 10000
-      'quantity' => $this->faker->numberBetween(1, 100), // Jumlah antara 1 dan 100
-      'manufacturer' => $this->faker->company,
-      'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'), // Tanggal dibuat dalam satu tahun terakhir
+      'name' => fake()->word(),
+      'description' => fake()->sentence(),
+      'price' => fake()->numberBetween(1000, 10000), // Harga antara 1000 dan 10000
+      'quantity' => fake()->numberBetween(1, 100), // Jumlah antara 1 dan 100
+      'manufacturer' => fake()->company,
+      'created_at' => fake()->dateTimeBetween('-1 year', 'now'), // Tanggal dibuat dalam satu tahun terakhir
       'updated_at' => now(),
       'category_id' => mt_rand(1, 2)
     ];

@@ -13,8 +13,8 @@ return new class extends Migration
     {
       Schema::create('order_items', function (Blueprint $table) {
         $table->uuid('order_item_id')->primary();
-        $table->foreignUuid('order_id')->references('order_id')->on('orders');
-        $table->foreignUuid('product_id')->references('product_id')->on('products');        
+        $table->foreignId('order_id')->references('id')->on('orders');
+        $table->foreignId('product_id')->references('id')->on('products');        
         $table->integer('sub_total');
         $table->integer('quantity');
     });
