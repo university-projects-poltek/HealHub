@@ -40,8 +40,10 @@ Route::get('/listbarang', [ListBarangController::class, 'tampilkan'] );
 
 
 // CRUD Products
-Route::get('/products', [ProductsController::class, 'index']);
-Route::get('/products/{id}', [ProductsController::class, 'show']);
-Route::post('/products', [ProductsController::class, 'store']);
-Route::put('/products/{id}', [ProductsController::class, 'update']);
-Route::delete('/products/{id}', [ProductsController::class, 'destroy']);
+Route::prefix('/products')->group(function(){
+  Route::get('/', [ProductsController::class, 'index']);
+  Route::get('/{id}', [ProductsController::class, 'show']);
+  Route::post('/', [ProductsController::class, 'store']);
+  Route::put('/{id}', [ProductsController::class, 'update']);
+  Route::delete('/{id}', [ProductsController::class, 'destroy']);
+});
