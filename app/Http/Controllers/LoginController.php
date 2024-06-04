@@ -9,21 +9,25 @@ class LoginController extends Controller
 {
     public static function index()
     {
-      return view('login');
+        return view('auth.login');
     }
 
-    public static function autentikasi(Request $request)
-    { 
-      $credentials = $request->validate([
-        'email' => 'required|email:dns',
-        'password' => 'required'
-      ]);
+    public static function loginProcess(Request $request)
+    {
+        $request->validate([
+            'email'     => 'required',
+            'password'  => 'required',
+        ]);
 
-      if(Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-        return redirect()->intended('/dashboard');
-      };
 
-      return back()->with('loginError', 'Login Failed!');
+        $data = $request->only('email', 'password');
+
+        if (!Auth::attempt($data)) {
+            return redirect()->route('login')->with('failed', 'Email atau Password Salah');
+        }
+
+        // return view('welcome');
+
+        // return redirect()->route('welcome');
     }
 }

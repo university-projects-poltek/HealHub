@@ -19,7 +19,7 @@ class User extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
     ];
@@ -46,6 +46,6 @@ class User extends Model
 
     public function orders()
     {
-      return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class);
     }
 }

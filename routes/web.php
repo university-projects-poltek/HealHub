@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ListBarangController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
@@ -30,20 +31,20 @@ Route::get('/', function () {
 
 Route::get('/listobat/{id}/{nama}/{jenis}', 'ListObatController@tampilkan');
 
-Route::get('/login', 'LoginController@index');
-Route::post('/login', 'LoginController@autentikasi');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login-process', [LoginController::class, 'loginProcess'])->name('login-process');
 
 Route::get('/register', 'RegisterController@pageRegister');
 
 
-Route::get('/listbarang', [ListBarangController::class, 'tampilkan'] );
+Route::get('/listbarang', [ListBarangController::class, 'tampilkan']);
 
 
 // CRUD Products
-Route::prefix('/products')->group(function(){
-  Route::get('/', [ProductsController::class, 'index']);
-  Route::get('/{id}', [ProductsController::class, 'show']);
-  Route::post('/', [ProductsController::class, 'store']);
-  Route::put('/{id}', [ProductsController::class, 'update']);
-  Route::delete('/{id}', [ProductsController::class, 'destroy']);
+Route::prefix('/products')->group(function () {
+    Route::get('/', [ProductsController::class, 'index']);
+    Route::get('/{id}', [ProductsController::class, 'show']);
+    Route::post('/', [ProductsController::class, 'store']);
+    Route::put('/{id}', [ProductsController::class, 'update']);
+    Route::delete('/{id}', [ProductsController::class, 'destroy']);
 });
