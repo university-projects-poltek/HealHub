@@ -382,7 +382,7 @@
                 </svg>
                 <span class="sr-only">Close modal</span>
             </button>
-            <form id="form_delete" method="POST" action="/products/{{ $product->id }}">
+            <form id="form_delete" method="POST" >
               @csrf
               @method('DELETE')
             <div class="p-4 md:p-5 text-center">
