@@ -7,8 +7,9 @@
 <body>
     <div class="flex justify-center items-center min-h-screen">
 
-        <form action="{{ route('login-process') }}" method="POST">
+        <form action="{{ route('login') }}" method="POST">
             @csrf
+            @method('POST')
             <div>
                 <input type="email" name="email" placeholder="Email">
                 @error('email')
