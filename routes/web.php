@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\ListBarangController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\User;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\SocialController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,19 +23,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/listbarang/{id}/{nama}/{jenis}', function($id, $nama, $jenis){
-//     return view ('list_barang', compact('id', 'nama', 'jenis'));
-
-// });
-
-// Route::get('/listobat/{id}/{nama}/{jenis}', [ListObatController::class, 'tampilkan']);
-
-Route::get('/listobat/{id}/{nama}/{jenis}', 'ListObatController@tampilkan');
+// Socialite Auth
+Route::get('/auth/google', [SocialController::class, 'getSocialRedirect']);
+Route::get('/auth/callback', [SocialController::class, 'getSocialHandle']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login-process', [LoginController::class, 'loginProcess'])->name('login-process');
+Route::post('/login', [LoginController::class, 'authenticate']);
 
-Route::get('/register', 'RegisterController@pageRegister');
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store']);
 
 
 Route::get('/listbarang', [ListBarangController::class, 'tampilkan']);
