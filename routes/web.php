@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ListBarangController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\User;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\SocialController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,29 +23,25 @@ Route::get('/', function () {
     return view('/login');
 });
 
-// Route::get('/listbarang/{id}/{nama}/{jenis}', function($id, $nama, $jenis){
-//     return view ('list_barang', compact('id', 'nama', 'jenis'));
+// Socialite Auth
+Route::get('/auth/google', [SocialController::class, 'getSocialRedirect']);
+Route::get('/auth/callback', [SocialController::class, 'getSocialHandle']);
 
-// });
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate']);
 
-// Route::get('/listobat/{id}/{nama}/{jenis}', [ListObatController::class, 'tampilkan']);
-
-Route::get('/listobat/{id}/{nama}/{jenis}', 'ListObatController@tampilkan');
-
-Route::get('/login', 'LoginController@index');
-Route::post('/login', 'LoginController@autentikasi');
-
-Route::get('/register', 'RegisterController@pageRegister');
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store']);
 
 
-Route::get('/listbarang', [ListBarangController::class, 'tampilkan'] );
+Route::get('/listbarang', [ListBarangController::class, 'tampilkan']);
 
 
 // CRUD Products
-Route::prefix('/products')->group(function(){
-  Route::get('/', [ProductsController::class, 'index']);
-  Route::get('/{id}', [ProductsController::class, 'show']);
-  Route::post('/', [ProductsController::class, 'store']);
-  Route::put('/{id}', [ProductsController::class, 'update']);
-  Route::delete('/{id}', [ProductsController::class, 'destroy']);
+Route::prefix('/products')->group(function () {
+    Route::get('/', [ProductsController::class, 'index']);
+    Route::get('/{id}', [ProductsController::class, 'show']);
+    Route::post('/', [ProductsController::class, 'store']);
+    Route::put('/{id}', [ProductsController::class, 'update']);
+    Route::delete('/{id}', [ProductsController::class, 'destroy']);
 });

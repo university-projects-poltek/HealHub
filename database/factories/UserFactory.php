@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -11,21 +11,30 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
-  /**
-   * Define the model's default state.
-   *
-   * @return array<string, mixed>
-   */
-  public function definition(): array
-  {
-    return [
-      'username' => fake()->name(),
-      'email' => fake()->unique()->safeEmail(),
-      'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-      'address' => fake()->address(),
-      'phone' => '39042390',
-      'role' => 'buyer',
-      
-    ];
-  }
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'username' => fake()->name(),
+            'email' => 'test@gmail.com',
+            'password' => Hash::make('123456'),
+            'address' => fake()->address(),
+            'phone' => '39042390',
+            'role' => 'buyer',
+
+        ];
+        // return [
+        //     'username' => fake()->name(),
+        //     'email' => fake()->unique()->safeEmail(),
+        //     'password' => Hash::make('123456'),
+        //     'address' => fake()->address(),
+        //     'phone' => '39042390',
+        //     'role' => 'buyer',
+
+        // ];
+    }
 }
