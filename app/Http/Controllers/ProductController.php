@@ -6,26 +6,30 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
-    public function index(){
-      return view('products', [
+    public function index()
+    {
+      return view('pages.admin.products', [
         "title" => "All Products",
         "categories" => Category::all(),
         "products" => Product::all(),
       ]);
     }
 
-    public function show($id){ 
+    public function show($id)
+    { 
       $product = Product::findOrFail($id);
 
-      return view('product', [
+      return view('pages.detail-product', [
         "title" => "Single Product",
         "product" => $product,
+        "products" => $this->getMoreProducts(),
       ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
       $validateData = $request->validate([
         'name' => 'required',
@@ -38,11 +42,12 @@ class ProductsController extends Controller
 
       Product::create($validateData);
 
-      return redirect('/products')->with('success', 'Product successfully created.');
+      return redirect()->route('admin.products')->with('success', 'Product successfully created.');
 
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
       
       $product = Product::findOrFail($id);
 
@@ -57,7 +62,7 @@ class ProductsController extends Controller
 
       $product->update($validatedData);
 
-      return redirect('/products')->with('success', 'Product updated successfully.');
+      return redirect()->route('admin.products')->with('success', 'Product updated successfully.');
 
     }
 
@@ -67,6 +72,13 @@ class ProductsController extends Controller
       $product = Product::findOrFail($id);
       $product->delete();
 
-      return redirect('/products')->with('success', 'Product deleted successfully');
+      return redirect()->route('admin.products')->with('success', 'Product deleted successfully');
+    }
+
+    public function getMoreProducts()
+    {
+      $products = Product::inRandomOrder()->take(4)->get();
+
+      return $products;
     }
 }
