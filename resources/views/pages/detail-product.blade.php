@@ -1,13 +1,9 @@
 <!-- resources/views/pages/detail.blade.php -->
 @extends('layouts.app')
 
-@section('title', 'Detail Product')
-
 @section('content')
-
 <section id='product-detail'>
   <div class="absolute inset-0 bg-gradient-to-b from-[#5D5DB4] via-[#5D5DB4] to-[#3B3B5E] h-[426px]"></div>
-
   <div class="relative flex flex-col items-center">
     {{-- Product name --}}
     <div class="pt-8 space-y-4 w-full">
@@ -107,6 +103,7 @@
         <h1 class="text-[#1E1E1E] font-semibold text-[32px] leading-[48px]">More Product</h1>
         <div class="flex gap-[22px]">
           {{-- Card Product --}}
+          
           @foreach ($products as $moreProduct)
             <x-product-card name="{{ $moreProduct->name }}" price="Rp {{ number_format($moreProduct->price) }}" category="{{ $moreProduct->category->name }}" />
               
