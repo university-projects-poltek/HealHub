@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\ListBarangController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SocialController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,11 +22,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('/login');
-});
 
-// Socialite Auth
+// Auth
 Route::get('/auth/google', [SocialController::class, 'getSocialRedirect']);
 Route::get('/auth/callback', [SocialController::class, 'getSocialHandle']);
 
@@ -33,15 +33,33 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/products/{id}', [ProductController::class, 'show']);
 
-Route::get('/listbarang', [ListBarangController::class, 'tampilkan']);
+Route::middleware(['auth', 'role:user'])->group(function () {
+  
+  Route::get('/profile', function() { return view('pages.user.profile'); });
+  Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+  
 
 
-// CRUD Products
-Route::prefix('/products')->group(function () {
-    Route::get('/', [ProductsController::class, 'index']);
-    Route::get('/{id}', [ProductsController::class, 'show']);
-    Route::post('/', [ProductsController::class, 'store']);
-    Route::put('/{id}', [ProductsController::class, 'update']);
-    Route::delete('/{id}', [ProductsController::class, 'destroy']);
+
+});
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+  Route::prefix('/dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'getAdminDashboard'])->name('admin.dashboard');
+    Route::get('/orders', [OrderController::class, 'getAdminOrder'])->name('admin.orders');
+
+    Route::prefix('/products')->group(function () {
+      Route::get('/', [ProductController::class, 'index'])->name('admin.products');
+      Route::post('/', [ProductController::class, 'store'])->name('store.product');
+      Route::put('/{id}', [ProductController::class, 'update'])->name('update.product');
+      Route::delete('/{id}', [ProductController::class, 'destroy'])->name('destroy.product');
+
+    });
+  });
+
+  Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 });

@@ -13,7 +13,7 @@ class LoginController extends Controller
     return view('auth.login');
   }
 
-  public static function authenticate(Request $request)
+  public function authenticate(Request $request)
   {
     $request->validate([
       'email'     => 'required',
@@ -27,6 +27,22 @@ class LoginController extends Controller
       return redirect()->route('login')->with('failed', 'Email atau Password Salah');
     }
 
-    return redirect()->route('register');
+    $user = Auth::user();
+
+    if ($user->role == 'admin') {
+      return redirect()->route('admin.dashboard');
+    };
+
+    return redirect()->route('home');
+  }
+
+  public function logout(Request $request)
+  {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    $request->session()->flush(); 
+
+    return redirect('/');
   }
 }
