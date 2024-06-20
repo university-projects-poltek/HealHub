@@ -24,17 +24,8 @@ class UserFactory extends Factory
             'password' => Hash::make('123456'),
             'address' => fake()->address(),
             'phone' => '39042390',
-            'role' => 'buyer',
+            'role' => 'user',
 
         ];
-        // return [
-        //     'username' => fake()->name(),
-        //     'email' => fake()->unique()->safeEmail(),
-        //     'password' => Hash::make('123456'),
-        //     'address' => fake()->address(),
-        //     'phone' => '39042390',
-        //     'role' => 'buyer',
-
-        // ];
     }
 }
