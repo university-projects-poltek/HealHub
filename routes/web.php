@@ -37,13 +37,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products/{id}', [ProductController::class, 'show']);
 
 Route::middleware(['auth', 'role:user'])->group(function () {
-  
-  Route::get('/profile', function() { return view('pages.user.profile'); });
   Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-  
-
-
-
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -56,10 +50,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
       Route::post('/', [ProductController::class, 'store'])->name('store.product');
       Route::put('/{id}', [ProductController::class, 'update'])->name('update.product');
       Route::delete('/{id}', [ProductController::class, 'destroy'])->name('destroy.product');
-
     });
   });
 
   Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
 });
