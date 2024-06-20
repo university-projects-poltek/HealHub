@@ -52,6 +52,46 @@
 
         </div>
         <div>
+          @if (Auth::user())
+          <div class="flex w-[150px] justify-end gap-3">
+            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown-profile" class="flex gap-3 items-center">
+              @if (Auth::user()->avatar)
+              <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" class="w-8 h-8 rounded-full ml-2">
+              @else
+              <img src="{{ asset('/images/user-placeholder.jpeg') }}" alt="{{ Auth::user()->email }}"
+                class="w-8 h-8 rounded-full ml-2">
+              @endif
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdown-profile"
+              class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+              <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                <li>
+                  <a href="/dashboard"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                </li>
+                <li>
+                  <a href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                </li>
+                <li>
+                  <a href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                </li>
+                <li>
+                  <form method="POST" action="{{ route('logout') }}" class="w-full">
+                    @csrf
+                    @method('POST')
+                    <button
+                      class="block px-4 py-2 w-full text-start hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      type="submit">Logout</button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          @else
           <a class="text-white focus:outline-none focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5  mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
             href="/login">
             Log in
@@ -60,6 +100,7 @@
             href="/signup">
             Sign up
           </a>
+          @endif
         </div>
       </div>
     </nav>
