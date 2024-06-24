@@ -1,35 +1,94 @@
-<html>
-
 <head>
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
-  <div class="flex justify-center items-center min-h-screen">
+<div class="flex items-center justify-center h-screen bg-gray-100">
+    <div
+        class="w-full max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-lg"
+    >
+        <div class="flex items-center gap-3 mb-2">
+            <img
+                src="{{ asset('/svg/logo.svg') }}"
+                width="30px"
+                height="30px"
+                alt=""
+            />
+            <h1 class="text-2xl font-bold text-center text-[#6E58ED]">
+                Apotik Cahaya Garden
+            </h1>
+        </div>
+        <h2 class="mb-3 text-xl font-semibold text-center">Masuk</h2>
+        <form action="{{ route('login') }}" method="POST">
+            @csrf @method('POST')
+            <div class="mb-4">
+                <label
+                    class="block mb-2 text-sm font-medium text-gray-700"
+                    for="email"
+                    >Email</label
+                >
+                <input
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="mymail@gmail.com"
+                />
+                @error('email')
+                <small class="text-red-600 mt-3">{{ $message }}</small>
+                @enderror
+            </div>
 
-    <form action="{{ route('login') }}" method="POST">
-      @csrf
-      @method('POST')
-      <div  class="flex flex-col gap-2 w-[300px]">
-        <input type="email" name="email" placeholder="Email">
-        @error('email')
-        <small>{{ $message }}</small>
-        @enderror
+            <div class="mb-3">
+                <label
+                    class="block mb-2 text-sm font-medium text-gray-700"
+                    for="password"
+                    >Kata Sandi</label
+                >
+                <input
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="********"
+                />
+                @error('password')
+                <small class="text-red-600 mt-3">{{ $message }}</small>
+                @enderror
+            </div>
 
-        <input type="password" name="password" placeholder="password">
+            <div class="text-right my-3">
+                <a
+                    class="text-sm text-primary hover:underline"
+                    href="{{ route('register') }}"
+                    >Daftar</a
+                >
+            </div>
+            <div class="flex items-center justify-between mb-6">
+                <button
+                    class="w-full px-4 py-2 font-bold text-white bg-primary rounded-md hover:bg-primary hover:opacity-50 focus:outline-none focus:ring-2 focus:ring-primary"
+                    type="submit"
+                >
+                    MASUK
+                </button>
+            </div>
 
-        @error('password')
-        <small>{{ $message }}</small>
-        @enderror
-        <button type="submit" class="border border-slate-500  px-4 py-3">Sign In</button>
-        <a href="{{ route('auth.google') }}" class="flex gap-2 justify-center items-center border border-slate-500  px-4 py-3">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6WwgH7Nl5_AW9nDCnR2Ozb_AU3rkIbSJdAg&s" alt="" class="w-7 h-7">
-          <p>Google</p>
-        </a>
-      </div>
-    </form>
-  </div>
+            <div>
+                <p class="text-center font-bold">atau</p>
+            </div>
 
-</body>
-
-</html>
+            <div class="text-center">
+                <a
+                    href="{{ route('auth.google') }}"
+                    class="flex items-center justify-center w-full px-4 py-2 mt-4 font-bold text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
+                >
+                    <img
+                        class="w-4 h-4 mr-2"
+                        src="https://www.google.com/images/icons/product/search-32.gif"
+                        alt="Google Logo"
+                    />
+                    Daftar dengan Google
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
