@@ -42,7 +42,7 @@ class ProductController extends Controller
 
       Product::create($validateData);
 
-      return redirect()->route('admin.products')->with('success', 'Product successfully created.');
+      return redirect('/dashboard/products')->with('success', 'Product successfully created.');
 
     }
 
