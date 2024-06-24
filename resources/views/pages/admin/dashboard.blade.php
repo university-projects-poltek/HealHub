@@ -6,7 +6,7 @@
     <div class="mx-10 grid grid-cols-3 gap-5">
       <div class="py-4 px-6 flex flex-col rounded-md shadow-lg gap-7">
         <h1 class="font-medium text-[16px] leading-[27px] text-[#A0A0A0]">Total Product</h1>
-        <span class="font-semibold text-[32px] leading-[48px]">0</span>
+        <span class="font-semibold text-[32px] leading-[48px]">{{ $totalProducts }}</span>
       </div>
       <div class="py-4 px-6 flex flex-col rounded-md shadow-lg gap-7">
         <h1 class="font-medium text-[16px] leading-[27px] text-[#A0A0A0]">Total Order</h1>

@@ -161,7 +161,7 @@
         </div>
         <!-- Modal body -->
         <div class="p-4 md:p-5">
-          <form id="form_create" action="/products" method="POST" class="space-y-4">
+          <form id="form_create" action="{{ route('store.product') }}" method="POST" class="space-y-4">
             @csrf 
             @method('POST')
             <div>
