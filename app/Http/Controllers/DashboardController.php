@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -13,6 +14,9 @@ class DashboardController extends Controller
 
   public function getAdminDashboard()
   {
-    return view('pages.admin.dashboard');
+    $totalProducts = Product::count();
+    return view('pages.admin.dashboard', [
+      'totalProducts' => $totalProducts,
+    ]);
   }
 }
