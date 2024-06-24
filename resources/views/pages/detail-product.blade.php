@@ -1,18 +1,14 @@
 <!-- resources/views/pages/detail.blade.php -->
 @extends('layouts.app')
 
-@section('title', 'Detail Product')
-
 @section('content')
-
 <section id='product-detail'>
   <div class="absolute inset-0 bg-gradient-to-b from-[#5D5DB4] via-[#5D5DB4] to-[#3B3B5E] h-[426px]"></div>
-
   <div class="relative flex flex-col items-center">
     {{-- Product name --}}
     <div class="pt-8 space-y-4 w-full">
       <a class="mr-auto px-4 py-2 rounded-[4px] bg-[#E6EAF1] text-secondary text-base font-semibold"
-        href="/skincare">{{ $product->category->name }}</a>
+        href="/products/category/{{ $product->category->slug }}">{{ $product->category->name }}</a>
       <h1 class="font-semibold text-[55px] text-white leading-[82.5px]">
         {{ $product->name }}
       </h1>
@@ -23,7 +19,7 @@
     <div class="w-full h-[1070px]">
       <div class="absolute top-[280px] w-full ">
         <img
-          src="https://s3-alpha-sig.figma.com/img/57f2/0290/48177419bfbc35077e359de7f015a426?Expires=1717372800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EIx-yFAtOgjGNZLAheemj~H-560APf-S2AizFzyaObXQCXZlGZnaIcZzlwYDOUGHZ2xLeE9nMmU8euHzkqePvkiB~fhhOFlfHrtP8vaCQaybpNgCkdXtBkQebMjWLKq8bq8RQ0VbNWfql806WFhrLhUMuikQz-LWim~fXAbBTjL0~aI-QDy9FPZPJCiqcjPuRPzZHbarVqxN0XxhET8KKxvzdSCRCYfM~KQwCHUhAJ3~7PSlDZVTbyOnKPAQha2vkOjhEpYJOx5XGbLx3OPBEjpjL5zhhu-CvhLCa-WWa72O5mLAwQZT3UDVUIEIaeQMr2IE0ntvNWUjLP-KNea~dQ__"
+          src="{{ asset('/images/dummy-product.png') }}"
           alt="" class="w-full h-[500px] object-cover rounded-[20px] mb-8" />
 
         <div class="relative">
@@ -107,8 +103,9 @@
         <h1 class="text-[#1E1E1E] font-semibold text-[32px] leading-[48px]">More Product</h1>
         <div class="flex gap-[22px]">
           {{-- Card Product --}}
+          
           @foreach ($products as $moreProduct)
-            <x-product-card name="{{ $moreProduct->name }}" price="Rp {{ number_format($moreProduct->price) }}" category="{{ $moreProduct->category->name }}" />
+            <x-product-card id="{{ $moreProduct->id }}" name="{{ $moreProduct->name }}" price="Rp {{ number_format($moreProduct->price) }}" category="{{ $moreProduct->category->name }}" />
               
           @endforeach
           {{-- <x-product-card name="Descolagen - Pharos" price="Rp 10,000" category="Skincare" />

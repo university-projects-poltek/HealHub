@@ -6,21 +6,17 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ProductCard extends Component
+class CategoryCard extends Component
 {
-    public $id;
-    public $name;
-    public $price;
-    public $category;
+  public $name;
+  public $slug;
     /**
      * Create a new component instance.
      */
-    public function __construct($id, $name, $price, $category)
+    public function __construct($name, $slug)
     {
-      $this->id = $id;
       $this->name = $name;
-      $this->price = $price;
-      $this->category = $category;
+      $this->slug = $slug;
     }
 
     /**
@@ -28,6 +24,6 @@ class ProductCard extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.product-card');
+        return view('components.category-card');
     }
 }

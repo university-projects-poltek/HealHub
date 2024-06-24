@@ -23,13 +23,6 @@ class AppServiceProvider extends ServiceProvider
    */
   public function boot(): void
   {
-    // Mengirim data kategori ke semua view
-    View::composer('*', function ($view) {
-      $categories = Category::all();
-      $moreProducts = Product::inRandomOrder()->take(4)->get();
-
-      $view->with('categories', $categories);
-      $view->with('products', $moreProducts);
-    });
+  
   }
 }

@@ -12,4 +12,10 @@ class CategoryController extends Controller
       $categories = Category::take(4)->get();
       return $categories;
     }
+
+    public function getCategoriesForNavbar() 
+    {
+      return Category::take(4)->get();
+      
+    }
 }

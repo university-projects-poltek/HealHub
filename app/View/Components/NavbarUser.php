@@ -5,22 +5,20 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Auth;
 
-class ProductCard extends Component
+class NavbarUser extends Component
 {
-    public $id;
-    public $name;
-    public $price;
-    public $category;
+  public $avatar;
+  public $name;
+
     /**
      * Create a new component instance.
      */
-    public function __construct($id, $name, $price, $category)
+    public function __construct($avatar, $name)
     {
-      $this->id = $id;
+      $this->avatar = $avatar;
       $this->name = $name;
-      $this->price = $price;
-      $this->category = $category;
     }
 
     /**
@@ -28,6 +26,7 @@ class ProductCard extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.product-card');
+        return view('components.navbar-user');
     }
 }
+

@@ -11,7 +11,7 @@ class RegisterController extends Controller
 {
   public static function index()
   {
-    return view('register');
+    return view('auth.register');
   }
 
   public static function store(Request $request)
@@ -22,7 +22,7 @@ class RegisterController extends Controller
       'password' => 'required|min:5|max:255',
     ]);
 
-    $validatedData['role'] = 'buyer';
+    $validatedData['role'] = 'user';
     $validatedData['password'] = Hash::make($validatedData['password']);
 
     $createUser = User::create($validatedData);

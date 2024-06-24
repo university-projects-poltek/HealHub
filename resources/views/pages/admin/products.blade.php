@@ -1,15 +1,5 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Products</title>
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-</head>
-
-<body>
+@extends('layouts.dashboard')
+@section('content')
   @if(session('success'))
   <div id="toast-success" class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
     <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
@@ -46,17 +36,21 @@
 </div>
   @endif
 
-  <div class="min-h-screen flex flex-col m-10 ">
-    <h1 class="text-left">{{ $title }}</h1>
+  <div class="flex flex-col">
+    
     <div class="overflow-x-auto">
-      <!-- Open the modal using ID.showModal() method -->
-      <button 
-        data-modal-target="create_modal" 
-        data-modal-toggle="create_modal"
-        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button">
-        Add products
-      </button>
+     
+      <div class="flex justify-between mb-4">
+        <h1 class="font-semibold text-[#6E58ED] text-[32px] leading-[48px]">My Products</h1>
+        <button 
+          data-modal-target="create_modal" 
+          data-modal-toggle="create_modal"
+          class="block text-white m-1 bg-[#4346D0] rounded-[21px] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          type="button">
+          Add products
+        </button>
+      </div>
+     
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -91,7 +85,7 @@
             @foreach($products as $index => $product)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {{ $index + 1 }}
+                {{ $product->id }}
               </th>
               <td class="px-6 py-4">
                 {{ $product->category->name }}
@@ -167,7 +161,7 @@
         </div>
         <!-- Modal body -->
         <div class="p-4 md:p-5">
-          <form id="form_create" action="/products" method="POST" class="space-y-4">
+          <form id="form_create" action="{{ route('store.product') }}" method="POST" class="space-y-4">
             @csrf 
             @method('POST')
             <div>
@@ -415,7 +409,7 @@
       $('#update_quantity').val(quantity)
       $('#update_manufacturer').val(manufacturer)
 
-      $('#form_update').attr('action', '/products/' + id);
+      $('#form_update').attr('action', '/dashboard/products/' + id);
 
       $('#update_modal').trigger('showModal');
     });
@@ -426,11 +420,9 @@
 
       $('span#delete_name').text(name);
 
-      $('#form_delete').attr('action', '/products/' + id);
+      $('#form_delete').attr('action', '/dashboard/products/' + id);
 
       $('#delete_modal').trigger('showModal');
     })
   </script>
-</body>
-
-</html>
+@endsection
