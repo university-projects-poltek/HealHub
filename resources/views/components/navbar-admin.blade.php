@@ -6,13 +6,12 @@
           <a class="flex justify-center items-center" href="/">
             <img src="{{ asset('images/logo.png') }}" alt="Logo">
           </a>
-          <a href="/home" class="text-white leading-4 ">Home</a>
           <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'font-bold' : '' }}">Dashboard</a>
           {{-- <a href="{{ route('admin.orders') }}" class="{{ request()->routeIs('admin.orders') ? 'font-bold' : '' }}">Orders</a>
           <a href="{{ route('admin.transactions') }}" class="{{ request()->routeIs('transactions') ? 'font-bold' : '' }}">Transaction</a> --}}
           <a href="{{ route('admin.products') }}" class="{{ request()->routeIs('admin.products') ? 'font-bold' : '' }}">Products</a>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center relative  gap-2">
           <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="flex gap-3 items-center">
             @if ($avatar)
             <img src="{{ $avatar }}" alt="{{ $name }}" class="w-8 h-8 rounded-full ml-2">
