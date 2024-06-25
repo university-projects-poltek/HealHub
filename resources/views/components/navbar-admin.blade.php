@@ -14,12 +14,12 @@
         <div class="flex items-center relative  gap-2">
           <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="flex gap-3 items-center">
             @if ($avatar)
-            <img src="{{ $avatar }}" alt="{{ $name }}" class="w-8 h-8 rounded-full ml-2">
+            <img src="{{ $avatar }}" alt="{{ $email }}" class="w-8 h-8 rounded-full ml-2">
             @else
             <img src="{{ asset('/images/user-placeholder.jpeg') }}" alt="{{ $email }}"
               class="w-8 h-8 rounded-full ml-2">
             @endif
-            <span class="text-base">{{ $name }}</span>
+            <span class="text-base">{{ $username }}</span>
             <svg class="w-2.5 h-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
               viewBox="0 0 10 6">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
