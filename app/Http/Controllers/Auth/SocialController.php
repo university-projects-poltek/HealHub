@@ -22,7 +22,7 @@ class SocialController extends Controller
     $user = User::updateOrCreate([
       'email' => $googleUser->email,
     ], [
-      'name' => $googleUser->name,
+      'username' => $googleUser->name,
       'email' => $googleUser->email,
       'avatar' => $googleUser->avatar,
       'password' => '123456'
