@@ -69,7 +69,7 @@
 
             <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown-profile" class="flex gap-3 items-center">
               @if (Auth::user()->avatar)
-              <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" class="w-8 h-8 rounded-full ml-2">
+              <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->email }}" class="w-8 h-8 rounded-full ml-2">
               @else
               <img src="{{ asset('/images/user-placeholder.jpeg') }}" alt="{{ Auth::user()->email }}"
                 class="w-8 h-8 rounded-full ml-2">

@@ -10,15 +10,17 @@ use Illuminate\Support\Facades\Auth;
 class NavbarUser extends Component
 {
   public $avatar;
-  public $name;
+  public $username;
+  public $email;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($avatar, $name)
+    public function __construct($avatar, $username, $email)
     {
       $this->avatar = $avatar;
-      $this->name = $name;
+      $this->username = $username;
+      $this->email = $email;
     }
 
     /**
