@@ -1,7 +1,8 @@
-<header class="hidden lg:block sticky top-0 left-0 right-0 z-50 bg-slate-600 bg-opacity-40 backdrop-blur ">
+<header class="hidden lg:block sticky top-0 left-0 right-0 z-50 " id="navbar">
   <div class="flex-none relative text-sm leading-6 text-white">
     <nav class="mx-auto lg:max-w-screen-xl px-4 sm:px-6 lg:px-[75px]">
       <div class="flex justify-between items-center py-4">
+       <div class="flex items-center gap-[26px]">
         <a class="flex justify-center items-center" href="/">
           <img src="{{ asset('images/logo.png') }}" alt="Logo">
           <p class="text-xl font-bold ml-3 mr-2 border-gray-200 text-slate-100">Apotek Cahaya Garden</p>
@@ -47,25 +48,28 @@
               </div>
             </div>
           </div>
-          <a href="#" class="">Stories</a>
-          <a href="#" class="">Benefits</a>
-          <a href="#" class="">About</a>
+        
 
         </div>
+       </div>
         <div>
           @if (Auth::user())
           <div class="flex w-[150px] justify-end items-center gap-3">
 
-
+            @if(Auth::user()->role == "user")
             <a href="/cart"
               class="relative inline-flex items-center p-[9px] text-sm font-medium text-center text-white ">
               <img src="{{ asset('/images/shopping-cart.png') }}" alt="Cart" class="w-6 h-6">
 
               <span class="sr-only">cart</span>
+              @if($cartItems > 0)
               <div
                 class="absolute inline-flex items-center justify-center w-5 h-5 text-[10px] font-bold text-white bg-red-500 border-2 border-white rounded-full -top-[-1px] -end-[-1px] dark:border-gray-900">
-                2</div>
+                {{ $cartItems }}
+              </div>
+              @endif
             </a>
+            @endif
 
             <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown-profile" class="flex gap-3 items-center">
               @if (Auth::user()->avatar)
@@ -132,7 +136,4 @@
       dropdown.classList.add('hidden');
     });
 
-    dropdown.addEventListener('mouseenter', () => {
-      dropdown.classList.remove('hidden');
-    });
 </script>
