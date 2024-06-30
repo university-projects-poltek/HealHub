@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
   public function getAdminOrder()
   {
-    return view('pages.admin.order');
+    $orders = Order::where('status', 'paid')->get();
+
+    return view('pages.admin.order', [
+      'orders' => $orders,
+    ]);
   }
+
+  
 }
