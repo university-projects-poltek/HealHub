@@ -74,6 +74,7 @@ Route::middleware(['auth'])->group(function () {
       Route::delete('/{id}', [CartController::class, 'removeItem'])->name('removeItem.cart');
     });
 
+    Route::get('/checkout', [CheckoutController::class, 'index']);
     Route::post('/checkout', [CheckoutController::class, 'showCheckout'])->name('show.checkout');
     Route::post('/checkout/process', [CheckoutController::class, 'processCheckout'])->name('process.checkout');
   });
