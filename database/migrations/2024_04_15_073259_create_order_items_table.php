@@ -15,8 +15,9 @@ return new class extends Migration
         $table->id();
         $table->foreignId('order_id')->references('id')->on('orders');
         $table->foreignId('product_id')->references('id')->on('products');        
-        $table->integer('sub_total');
+        $table->integer('price');
         $table->integer('quantity');
+        $table->timestamps();
     });
     }
 
