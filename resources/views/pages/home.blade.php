@@ -139,6 +139,10 @@
       alert("{{ session('error') }}");
     @endif
 
+    @if (session('success'))
+      alert("{{ session('success') }}");
+    @endif
+
     const $navbar = $('#navbar');
 
     $navbar.addClass('blur-bg bg-transparent')

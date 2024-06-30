@@ -87,14 +87,14 @@
 		<div class="col-span-4">
 			<div class="rounded-2xl border border-[#7D8BA5]">
 				<div class="px-[22px] py-[16px] gap-[18px]">
-					<form action="{{ route('show.checkout') }}" class="flex flex-col gap-[18px]" method="POST">
+					<form action="{{ route('show.checkout') }}" id="checkout_form" class="flex flex-col gap-[18px]" method="POST">
 						@csrf
 						@method('POST')
 						<div class="flex flex-col">
 							<h1 class="font-semibold leading-6">Nama Penerima</h1>
 							<div class="flex flex-col gap-4 my-[21px]">
 								<label class="font-medium text-sm" for="name">Nama</label>
-								<input type="text" name="name" id="name" class="rounded-[10px]" placeholder="Andi Setiawan">
+								<input type="text" name="name" id="name" class="rounded-[10px]" placeholder="Andi Setiawan" required>
 								@error('name')
 								<p class="text-red-500 text-sm">{{ $message }}</p>
 								@enderror
@@ -102,7 +102,7 @@
 							<div class="flex flex-col gap-4 mb-[21px]">
 								<label class="font-medium text-sm" for="address">Alamat</label>
 								<input type="text" name="address" id="address" class="rounded-[10px]"
-									placeholder="Jl. Merdeka No. 123, Jakarta">
+									placeholder="Jl. Merdeka No. 123, Jakarta" required>
 								@error('address')
 								<p class="text-red-500 text-sm">{{ $message }}</p>
 								@enderror
@@ -110,7 +110,7 @@
 							<div class="flex flex-col gap-4 mb-[18px]">
 								<label class="font-medium text-sm" for="number_phone">No Handphone</label>
 								<input type="number" name="number_phone" id="number_phone" class="rounded-[10px]"
-									placeholder="081234567890">
+									placeholder="081234567890" required>
 								@error('number_phone')
 								<p class="text-red-500 text-sm">{{ $message }}</p>
 								@enderror
@@ -147,12 +147,36 @@
 	</div>
 </section>
 
+
+
 <script type="module">
 	$(document).ready(function() {
 
     @if (session('error'))
       alert("{{ session('error') }}");
     @endif
+
+    $('#checkout_form').on('submit', function(e) {
+        e.preventDefault();
+        $.post($(this).attr('action'), $(this).serialize(), function(response) {
+            // $('#checkoutModalContent').html(response);
+            // console.log(response)
+            $('body').append(response);
+            const $targetEl = document.getElementById('checkoutModal');
+            if ($targetEl) {
+                const modal = new Modal($targetEl, {
+                    onHide: () => {
+                        alert('Pembayaran gagal. Mohon ditutup sebelum proses selesai.')
+                    }
+                });
+                modal.show();
+            } else {
+                console.error('Modal element not found');
+            }
+        }).fail(function(xhr) {
+        console.log(xhr.responseJSON.errors);
+    });
+    });
 
     $('.itemCheckbox:checked').each(function() {
       var itemId = $(this).val();

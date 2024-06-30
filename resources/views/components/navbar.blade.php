@@ -1,4 +1,4 @@
-<header class="hidden lg:block sticky top-0 left-0 right-0 z-50 " id="navbar">
+<header class="hidden lg:block sticky top-0 left-0 right-0 z-40 " id="navbar">
   <div class="flex-none relative text-sm leading-6 text-white">
     <nav class="mx-auto lg:max-w-screen-xl px-4 sm:px-6 lg:px-[75px]">
       <div class="flex justify-between items-center py-4">
@@ -48,7 +48,7 @@
               </div>
             </div>
           </div>
-        
+
 
         </div>
        </div>
@@ -129,7 +129,7 @@
     const dropdown = document.querySelector('.dropdown');
 
     dropdownToggle.addEventListener('mouseenter', () => {
-      dropdown.classList.remove('hidden');      
+      dropdown.classList.remove('hidden');
     });
 
     dropdown.addEventListener('mouseleave', () => {
