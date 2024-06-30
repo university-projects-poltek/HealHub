@@ -41,9 +41,9 @@
       </div>
     </a>
     @foreach ($categories as $category)
-      <x-category-card name="{{ $category->name }}" slug="{{ $category->slug }}" />
+    <x-category-card name="{{ $category->name }}" slug="{{ $category->slug }}" />
     @endforeach
-   
+
   </div>
 </section>
 
@@ -51,9 +51,15 @@
   <h2 class="font-semibold text-[32px]">Produk Baru</h2>
   <div class="grid grid-cols-4 gap-[22px]">
     @foreach ($newProducts as $newProduct)
-      <x-product-card id="{{ $newProduct->id }}" name="{{ $newProduct->name }}" price="Rp. {{ number_format($newProduct->price) }}" category="{{ $newProduct->category->name }}" />
+    <x-product-card
+      id="{{ $newProduct->id }}"
+      name="{{ $newProduct->name }}"
+      price="Rp. {{ number_format($newProduct->price) }}"
+      category="{{ $newProduct->category->name }}"
+      image="{{ $newProduct->image }}"
+    />
     @endforeach
-    
+
 
   </div>
 </section>
@@ -79,10 +85,10 @@
       </div>
     </div>
 
-    <div class="flex flex-row gap-[20px] ml-auto pb-[75px] overflow-x-auto" >
-      
+    <div class="flex flex-row gap-[20px] ml-auto pb-[75px] overflow-x-auto">
 
-  
+
+
       <x-customer-card name="Sarah Lopez"
         description="Saya sangat terkesan dengan efektivitas obat ini! Hanya dalam beberapa hari penggunaan, saya merasakan perubahan yang signifikan dalam kondisi kesehatan saya. Terima kasih banyak" />
       <x-customer-card name="Sarah Lopez"
@@ -118,39 +124,36 @@
             </div>
           </div>
         </a>
-
         @endforeach
-
-
       </div>
     </div>
   </div>
 </section>
 
-@endsection
 
 
-<script>
+<script type="module">
   $(document).ready(function() {
-    $('#search-icon').on('click', function() {
-      $('#search-input').focus();
-    });
 
-    $('#search-input').on('focus', function() {
-      $(this).attr('placeholder', '');
-    });
+    @if (session('error'))
+      alert("{{ session('error') }}");
+    @endif
 
-    $('#search-input').on('blur', function() {
-      $(this).attr('placeholder', 'Search here...');
-    });
+    const $navbar = $('#navbar');
 
-    $("#carousel").slick({
-          infinite: true,
-          loop: true,
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          dots: true
-        });
+    $navbar.addClass('blur-bg bg-transparent')
+
+    $(window).on('scroll', function() {
+      if ($(this).scrollTop() > 320) {
+        $navbar.removeClass('blur-bg bg-transparent').addClass('bg-primary transition ease-in-out delay-150');
+      } else {
+        $navbar.removeClass('bg-primary').addClass('blur-bg bg-transparent transition ease-in-out delay-100');
+      }
+    });
 
   });
+
 </script>
+
+
+@endsection

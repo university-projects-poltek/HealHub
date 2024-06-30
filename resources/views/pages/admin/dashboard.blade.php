@@ -10,11 +10,11 @@
       </div>
       <div class="py-4 px-6 flex flex-col rounded-md shadow-lg gap-7">
         <h1 class="font-medium text-[16px] leading-[27px] text-[#A0A0A0]">Total Order</h1>
-        <span class="font-semibold text-[32px] leading-[48px]">0</span>
+        <span class="font-semibold text-[32px] leading-[48px]">{{ $totalOrders }}</span>
       </div>
       <div class="py-4 px-6 flex flex-col rounded-md shadow-lg gap-7">
         <h1 class="font-medium text-[16px] leading-[27px] text-[#A0A0A0]">Total Income</h1>
-        <span class="font-semibold text-[32px] leading-[48px]">Rp. 0</span>
+        <span class="font-semibold text-[32px] leading-[48px]">Rp. {{ number_format($totalIncome, 0, ',', '.' ) }}</span>
       </div>
     </div>
   </section>

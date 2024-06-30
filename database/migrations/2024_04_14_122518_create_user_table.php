@@ -20,8 +20,7 @@ return new class extends Migration
             $table->integer('phone')->nullable();
             $table->string('avatar')->nullable();
             $table->enum('role', ['user', 'admin']);
-            $table->string('updated_at');
-            $table->string('created_at');
+            $table->timestamps();
         });
     }
 

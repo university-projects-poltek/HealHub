@@ -12,15 +12,17 @@ class ProductCard extends Component
     public $name;
     public $price;
     public $category;
+    public $image;
     /**
      * Create a new component instance.
      */
-    public function __construct($id, $name, $price, $category)
+    public function __construct($id, $name, $price, $category, $image)
     {
       $this->id = $id;
       $this->name = $name;
       $this->price = $price;
       $this->category = $category;
+      $this->image = $image;
     }
 
     /**

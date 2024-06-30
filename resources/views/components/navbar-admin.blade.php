@@ -7,9 +7,10 @@
             <img src="{{ asset('images/logo.png') }}" alt="Logo">
           </a>
           <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'font-bold' : '' }}">Dashboard</a>
-          {{-- <a href="{{ route('admin.orders') }}" class="{{ request()->routeIs('admin.orders') ? 'font-bold' : '' }}">Orders</a>
-          <a href="{{ route('admin.transactions') }}" class="{{ request()->routeIs('transactions') ? 'font-bold' : '' }}">Transaction</a> --}}
+          <a href="{{ route('admin.orders') }}" class="{{ request()->routeIs('admin.orders') ? 'font-bold' : '' }}">Orders</a>
+          <a href="{{ route('admin.transactions') }}" class="{{ request()->routeIs('transactions') ? 'font-bold' : '' }}">Transaction</a>
           <a href="{{ route('admin.products') }}" class="{{ request()->routeIs('admin.products') ? 'font-bold' : '' }}">Products</a>
+          <a href="{{ route('admin.categories') }}" class="{{ request()->routeIs('admin.categories') ? 'font-bold' : '' }}">Categories</a>
         </div>
         <div class="flex items-center relative  gap-2">
           <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="flex gap-3 items-center">

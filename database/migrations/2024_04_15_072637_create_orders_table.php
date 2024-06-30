@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('order_date');
             $table->enum('status', ['pending', 'paid', 'canceled'])->default('pending');
             $table->enum('payment_method', ['credit_card', 'bank_transfer']);
+            $table->string('payment_proof')->nullable();
             $table->integer('total_amount');
             $table->timestamps();
         });

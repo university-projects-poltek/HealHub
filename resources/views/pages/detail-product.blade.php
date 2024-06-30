@@ -19,7 +19,7 @@
     <div class="w-full h-[1070px]">
       <div class="absolute top-[280px] w-full ">
         <img
-          src="{{ asset('/images/dummy-product.png') }}"
+          src="{{ Storage::url('product_images/' . $product->image) }}"
           alt="" class="w-full h-[500px] object-cover rounded-[20px] mb-8" />
 
         <div class="relative">
@@ -81,10 +81,17 @@
                   </div>
                 </div>
 
-                <button
-                  class="px-[20px] py-3 border rounded-[100px] bg-[#2D68F8] text-white text-base font-semibold text-center">
-                  Check out
-                </button>
+                <form action="{{ route('addToCart') }}" method="post" class="w-full">
+                  @method('POST')
+                  @csrf
+                  <input type="number" name="product_id" value="{{ $product->id }}" hidden>
+                  <input type="number" name="quantity" value="1" hidden>
+                  <button
+                  type="submit"
+                    class="px-[20px] py-3 border rounded-[100px] w-full bg-[#2D68F8] text-white text-base font-semibold text-center">
+                    Check out
+                  </button>
+                </form>
 
               </div>
             </div>
@@ -103,14 +110,10 @@
         <h1 class="text-[#1E1E1E] font-semibold text-[32px] leading-[48px]">More Product</h1>
         <div class="flex gap-[22px]">
           {{-- Card Product --}}
-          
+
           @foreach ($products as $moreProduct)
-            <x-product-card id="{{ $moreProduct->id }}" name="{{ $moreProduct->name }}" price="Rp {{ number_format($moreProduct->price) }}" category="{{ $moreProduct->category->name }}" />
-              
+            <x-product-card id="{{ $moreProduct->id }}" name="{{ $moreProduct->name }}" price="Rp {{ number_format($moreProduct->price) }}" category="{{ $moreProduct->category->name }}" image="{{ $moreProduct->image }}" />
           @endforeach
-          {{-- <x-product-card name="Descolagen - Pharos" price="Rp 10,000" category="Skincare" />
-          <x-product-card name="Descolagen - Pharos" price="Rp 10,000" category="Skincare" />
-          <x-product-card name="Descolagen - Pharos" price="Rp 10,000" category="Skincare" /> --}}
         </div>
 
       </div>
@@ -155,4 +158,20 @@
 
   </div>
 </section>
+
+<script type="module">
+  $(document).ready(function() {
+    console.log('halo')
+    const $navbar = $('#navbar');
+
+    $(window).on('scroll', function() {
+      if ($(this).scrollTop() > 320) {
+        $navbar.removeClass('blur-bg bg-transparent').addClass('bg-primary transition ease-in-out delay-150');
+      } else {
+        $navbar.removeClass('bg-gray-800').addClass('blur-bg bg-transparent transition ease-in-out delay-100');
+      }
+    });
+  });
+</script>
+
 @endsection
