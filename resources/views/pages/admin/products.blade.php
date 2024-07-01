@@ -1,20 +1,20 @@
 @extends('layouts.dashboard')
 @section('content')
   <div class="flex flex-col">
-    
+
     <div class="overflow-x-auto">
-     
+
       <div class="flex justify-between mb-4">
         <h1 class="font-semibold text-[#6E58ED] text-[32px] leading-[48px]">My Products</h1>
-        <button 
-          data-modal-target="create_modal" 
+        <button
+          data-modal-target="create_modal"
           data-modal-toggle="create_modal"
           class="block text-white m-1 bg-[#4346D0] rounded-[21px] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           type="button">
           Add products
         </button>
       </div>
-     
+
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -61,7 +61,7 @@
                 {{ $product->description }}
               </td>
               <td class="px-6 py-4">
-                {{ $product->price }}
+                Rp. {{ number_format($product->price) }}
               </td>
               <td class="px-6 py-4">
                 {{ $product->stock }}
@@ -70,25 +70,25 @@
                 {{ $product->manufacturer }}
               </td>
               <td class="px-6 py-4 text-center">
-                <button 
+                <button
                   id="open_delete_modal"
                   class="font-medium text-red-600 dark:text-red-500 hover:underline"
-                  data-modal-target="delete_modal" 
-                  data-modal-toggle="delete_modal" 
+                  data-modal-target="delete_modal"
+                  data-modal-toggle="delete_modal"
                   data-id="{{ $product->id }}"
                   data-name="{{ $product->name }}">
                   Delete
                 </button>
-                <button 
+                <button
                   id="open_update_modal"
                   class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  data-modal-target="update_modal" 
-                  data-modal-toggle="update_modal" 
+                  data-modal-target="update_modal"
+                  data-modal-toggle="update_modal"
                   data-id="{{ $product->id }}"
-                  data-name="{{ $product->name }}" 
+                  data-name="{{ $product->name }}"
                   data-price="{{ $product->price}}"
                   data-image="{{ $product->image }}"
-                  data-description="{{ $product->description }}" 
+                  data-description="{{ $product->description }}"
                   data-stock="{{ $product->stock }}"
                   data-manufacturer="{{ $product->manufacturer }}"
                 >
@@ -127,33 +127,33 @@
         <!-- Modal body -->
         <div class="p-4 md:p-5">
           <form id="form_create" action="{{ route('store.product') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
-            @csrf 
+            @csrf
             @method('POST')
             <div>
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Name
               </label>
-              <input 
-                id="name" 
-                name="name" 
-                type="text" 
-                placeholder="Product name" 
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Product name"
                 value="{{ old('name') }}"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" 
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               />
               @if ($errors->has('name'))
                 <p class="text-red-500 text-xs mt-2">{{ $errors->first('category_id') }}</p>
               @endif
             </div>
 
-            
+
             <div>
               <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
               <select id="category" name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected vlaue="">Choose a category</option>
                 @foreach ($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    
+
                 @endforeach
               </select>
               @if ($errors->has('category_id'))
@@ -165,13 +165,13 @@
               <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Description
               </label>
-              <input 
-                type="text" 
-                id="description" 
-                name="description" 
+              <input
+                type="text"
+                id="description"
+                name="description"
                 placeholder=""
                 value="{{ old('description') }}"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" 
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               />
               @if ($errors->has('description'))
                 <p class="text-red-500 text-xs mt-2">{{ $errors->first('category_id') }}</p>
@@ -182,13 +182,13 @@
               <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Price
               </label>
-              <input 
-                type="number" 
-                id="price" 
-                name="price" 
+              <input
+                type="number"
+                id="price"
+                name="price"
                 placeholder=""
                 value="{{ old('price') }}"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" 
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               />
               @if ($errors->has('price'))
                 <p class="text-red-500 text-xs mt-2">{{ $errors->first('price') }}</p>
@@ -201,13 +201,13 @@
               <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Image
               </label>
-              <input 
-                type="file" 
+              <input
+                type="file"
                 id="image"
-                name="image" 
+                name="image"
                 placeholder=""
                 value="{{ old('image') }}"
-                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
               />
               @if ($errors->has('image'))
                 <p class="text-red-500 text-xs mt-2">{{ $errors->first('image') }}</p>
@@ -219,13 +219,13 @@
               <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Stock
               </label>
-              <input 
-                type="number" 
+              <input
+                type="number"
                 id="stock"
-                name="stock" 
+                name="stock"
                 placeholder=""
                 value="{{ old('stock') }}"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" 
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               />
               @if ($errors->has('stock'))
                 <p class="text-red-500 text-xs mt-2">{{ $errors->first('stock') }}</p>
@@ -236,13 +236,13 @@
               <label for="manufacturer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Manufacturer
               </label>
-              <input 
-                type="text" 
-                id="manufacturer" 
-                name="manufacturer" 
+              <input
+                type="text"
+                id="manufacturer"
+                name="manufacturer"
                 placeholder=""
                 value="{{ old('manufacturer') }}"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" 
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               />
               @if ($errors->has('manufacturer'))
                 <p class="text-red-500 text-xs mt-2">{{ $errors->first('manufacturer') }}</p>
@@ -290,64 +290,64 @@
             @csrf
             @method('PUT')
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-            <input 
-              id="update_name" 
-              name="name" 
-              type="text" 
+            <input
+              id="update_name"
+              name="name"
+              type="text"
               placeholder="Product name"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             />
 
             <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-            <input 
-              type="text" 
-              id="update_description" 
-              name="description" 
+            <input
+              type="text"
+              id="update_description"
+              name="description"
               placeholder=""
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" 
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             />
 
             <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-            <input 
-              type="number" 
-              id="update_price" 
-              name="price" 
-              placeholder="" 
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" 
+            <input
+              type="number"
+              id="update_price"
+              name="price"
+              placeholder=""
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             />
 
             <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
-            <input 
-              type="number" 
-              id="update_stock" 
-              name="stock" 
+            <input
+              type="number"
+              id="update_stock"
+              name="stock"
               placeholder=""
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" 
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             />
 
             <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
               <p id="image_value"></p>
               <p id="no_file_message">Tidak ada file yang diunggah</p>
-            
-            <input 
-              type="file" 
-              id="update_image" 
-              name="image" 
+
+            <input
+              type="file"
+              id="update_image"
+              name="image"
               placeholder=""
-              class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+              class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
             />
 
             <label for="manufacturer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Manufacturer</label>
-            <input 
-              type="text" 
-              id="update_manufacturer" 
-              name="manufacturer" 
+            <input
+              type="text"
+              id="update_manufacturer"
+              name="manufacturer"
               placeholder="Product name"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" 
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             />
 
             {{-- Category Input --}}
-            <input 
+            <input
             type="number" id="category" name="category_id" placeholder="Product name"
               class="input input-bordered w-full max-w-xs" value="3" hidden />
 
@@ -362,7 +362,7 @@
       </div>
     </div>
   </div>
-  
+
   {{-- Modal Delete --}}
   <div id="delete_modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
@@ -410,33 +410,33 @@
         let image = $(this).data('image')
         let stock =  $(this).data('stock')
         let manufacturer =  $(this).data('manufacturer')
-        
+
         $('#image_value').text(image)
         if (!image) {
           $('#no_file_message').show();
         } else {
           $('#no_file_message').hide();
         }
-  
+
         $('#update_name').val(name)
         $('#update_price').val(price)
         $('#update_description').val(description)
         $('#update_stock').val(stock)
         $('#update_manufacturer').val(manufacturer)
-  
+
         $('#form_update').attr('action', '/dashboard/products/' + id);
-  
+
         $('#update_modal').trigger('showModal');
       });
-  
+
       $("button#open_delete_modal").click(function(){
         let id = $(this).data('id')
         let name = $(this).data('name')
-  
+
         $('span#delete_name').text(name);
-  
+
         $('#form_delete').attr('action', '/dashboard/products/' + id);
-  
+
         $('#delete_modal').trigger('showModal');
       })
     })
