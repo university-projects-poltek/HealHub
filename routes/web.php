@@ -38,6 +38,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products/{id}', [ProductController::class, 'show']);
+Route::get('/products', [ProductController::class, 'getAllProducts']);
+Route::get('/products/category/{category?}', [ProductController::class, 'getProductsByCategory']);
 
 
 Route::middleware(['auth'])->group(function () {
