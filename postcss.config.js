@@ -3,4 +3,8 @@ export default {
     tailwindcss: {},
     autoprefixer: {},
   },
+  content: [
+    './resources/views/**/*.blade.php',
+    './resources/**/*.js',
+  ],
 }
