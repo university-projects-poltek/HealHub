@@ -19,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('/login');
-});
+
 
 // Socialite Auth
 Route::get('/auth/google', [SocialController::class, 'getSocialRedirect']);
