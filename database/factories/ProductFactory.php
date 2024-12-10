@@ -20,7 +20,7 @@ class ProductFactory extends Factory
       'name' => fake()->word(),
       'description' => fake()->sentence(),
       'price' => fake()->numberBetween(1000, 10000), // Harga antara 1000 dan 10000
-      'quantity' => fake()->numberBetween(1, 100), // Jumlah antara 1 dan 100
+      'stock' => fake()->numberBetween(1, 100), // Jumlah antara 1 dan 100
       'manufacturer' => fake()->company,
       'created_at' => fake()->dateTimeBetween('-1 year', 'now'), // Tanggal dibuat dalam satu tahun terakhir
       'updated_at' => now(),

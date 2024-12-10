@@ -8,17 +8,21 @@ use Illuminate\View\Component;
 
 class ProductCard extends Component
 {
+    public $id;
     public $name;
     public $price;
     public $category;
+    public $image;
     /**
      * Create a new component instance.
      */
-    public function __construct($name, $price, $category)
+    public function __construct($id, $name, $price, $category, $image)
     {
+      $this->id = $id;
       $this->name = $name;
       $this->price = $price;
       $this->category = $category;
+      $this->image = $image;
     }
 
     /**

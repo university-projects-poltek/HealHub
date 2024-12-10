@@ -4,23 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@yield('title')</title>
+  <title>Apotek Cahaya Garden</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 </head>
 
 <body class="bg-[#F6F7F9]">
+  <x-navbar  />
 
-  
-    <x-navbar />
+  <main class="max-w-6xl mx-auto min-h-screen ">
+    @yield('content')
+  </main>
 
-    <main class="max-w-6xl mx-auto">
-      @yield('content')
-    </main>
+  <x-footer />
+<script type="module">
+  $(document).ready(function() {
+    const $navbar = $('#navbar');
 
-  
-    <x-footer />
-  
+    $navbar.addClass('bg-primary')
+  })
+</script>
 </body>
 
 </html>

@@ -13,12 +13,19 @@ class LoginController extends Controller
     return view('auth.login');
   }
 
-  public static function authenticate(Request $request)
+  public function authenticate(Request $request)
   {
-    $request->validate([
+    $rules = [
       'email'     => 'required',
       'password'  => 'required',
-    ]);
+    ];
+
+    $customMessages = [
+      'email.required' => 'Silahkan masukan email',
+      'password.required' => 'Silahkan masukan kata sandi',
+    ];
+
+    $this->validate($request, $rules, $customMessages);
 
 
     $data = $request->only('email', 'password');
@@ -27,6 +34,22 @@ class LoginController extends Controller
       return redirect()->route('login')->with('failed', 'Email atau Password Salah');
     }
 
-    return redirect()->route('register');
+    $user = Auth::user();
+
+    if ($user->role == 'admin') {
+      return redirect()->route('admin.dashboard');
+    };
+
+    return redirect()->route('home');
+  }
+
+  public function logout(Request $request)
+  {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    $request->session()->flush();
+
+    return redirect('/');
   }
 }

@@ -19,12 +19,10 @@ class SocialController extends Controller
   {
     $googleUser = Socialite::driver('google')->user();
 
-    // dd($googleUser->name);
-
     $user = User::updateOrCreate([
       'email' => $googleUser->email,
     ], [
-      'name' => $googleUser->name,
+      'username' => $googleUser->name,
       'email' => $googleUser->email,
       'avatar' => $googleUser->avatar,
       'password' => '123456'
@@ -34,6 +32,6 @@ class SocialController extends Controller
 
     Auth::login($user);
 
-    return redirect('/products');
+    return redirect()->route('home');
   }
 }

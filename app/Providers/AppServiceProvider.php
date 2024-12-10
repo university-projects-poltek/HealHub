@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,13 +24,8 @@ class AppServiceProvider extends ServiceProvider
    */
   public function boot(): void
   {
-    // Mengirim data kategori ke semua view
-    View::composer('*', function ($view) {
-      $categories = Category::all();
-      $moreProducts = Product::inRandomOrder()->take(4)->get();
-
-      $view->with('categories', $categories);
-      $view->with('products', $moreProducts);
-    });
+    if($this->app->environment('production')) {
+        URL::forceScheme('https');
+    }
   }
 }

@@ -1,4 +1,9 @@
 import './bootstrap';
 import 'flowbite';
-import jQuery from 'jquery';
-window.$ = jQuery;
+import $ from 'jquery';
+import { Modal } from 'flowbite';
+
+window.Modal = Modal
+window.$ = window.jQuery = $;
+
+
